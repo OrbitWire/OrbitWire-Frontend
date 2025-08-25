@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
+import Sidebar from "@/components/Sidebar/Sidebar";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -30,6 +31,15 @@ export default function RootLayout({ children }) {
                     enableSystem
                 >
                     <Navbar />
+                    <Sidebar />
+                    {/* <video
+                        className="fixed top-0 left-0 w-full h-screen object-cover z-[-1]"
+                        src="/star-vid.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                    /> */}
                     {children}
                 </ThemeProvider>
             </body>
