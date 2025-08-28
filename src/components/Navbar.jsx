@@ -7,13 +7,12 @@ import {
     NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
 
-import { ModeToggle } from "./ModeToggle";
 import { usePathname } from "next/navigation";
 
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { Gamepad2, House, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { MdOutlineSportsTennis } from "react-icons/md";
 import { LiaTrophySolid } from "react-icons/lia";
@@ -21,9 +20,7 @@ import { GrTechnology } from "react-icons/gr";
 
 import {
     Sheet,
-    SheetClose,
     SheetContent,
-    SheetDescription,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
@@ -43,7 +40,10 @@ const Navbar = () => {
 
     return (
         <nav className="w-full h-[8.5vh] border-b border-b-border flex items-center justify-between fixed top-0 z-50 ">
-            <div className="w-[10rem] h-full overflow-hidden relative">
+            <Link
+                href={"/"}
+                className="w-[10rem] h-full overflow-hidden relative"
+            >
                 <Image
                     src="/logo-black.png"
                     alt="dark logo"
@@ -56,7 +56,7 @@ const Navbar = () => {
                     fill
                     className="absolute inset-0 object-cover dark:hidden block"
                 />
-            </div>
+            </Link>
 
             {/* desktop navbar */}
             <div className="hidden md:block p-2 border border-border/50 rounded">
@@ -66,7 +66,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                         <Link
                             href={"/"}
-                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[1rem]  ${
+                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.8rem]  ${
                                 pathname === "/"
                                     ? "bg-primary text-primary-foreground hover:bg-primary"
                                     : "text-foreground hover:bg-accent hover:outline"
@@ -79,7 +79,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                         <Link
                             href={"/gaming"}
-                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[1rem] ${
+                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.8rem] ${
                                 pathname === "/gaming"
                                     ? "bg-primary text-primary-foreground hover:bg-primary"
                                     : "text-foreground hover:bg-accent "
@@ -92,7 +92,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                         <Link
                             href={"/esports"}
-                            className={`px-3.5 py-1.5 rounded-lg transition-colors focus:bg-primary text-[1rem] ${
+                            className={`px-3.5 py-1.5 rounded-lg transition-colors focus:bg-primary text-[0.8rem] ${
                                 pathname === "/esports"
                                     ? "bg-primary text-primary-foreground hover:bg-primary"
                                     : "text-foreground hover:bg-accent "
@@ -105,7 +105,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                         <Link
                             href={"/sports"}
-                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[1rem] ${
+                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.8rem] ${
                                 pathname === "/sports"
                                     ? "bg-primary text-primary-foreground hover:bg-primary"
                                     : "text-foreground hover:bg-accent "
@@ -118,7 +118,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                         <Link
                             href={"/technology"}
-                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[1rem] ${
+                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.8rem] ${
                                 pathname === "/technology"
                                     ? "bg-primary text-primary-foreground hover:bg-primary"
                                     : "text-foreground hover:bg-accent "
@@ -243,8 +243,7 @@ const Navbar = () => {
                 </Sheet>
             </div>
 
-            <div className="absolute right-10">
-                {/* <ModeToggle /> */}
+            <div className="mr-10">
                 <ThemeToggleButton variant="circle" start="top-right" />
             </div>
         </nav>

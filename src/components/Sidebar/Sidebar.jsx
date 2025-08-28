@@ -2,10 +2,11 @@
 
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { PanelRightClose } from "lucide-react";
 import { ShimmeringText } from "../ui/shadcn-io/shimmering-text";
+import { Button } from "../ui/button";
 
 const Sidebar = () => {
     const path = usePathname();
@@ -13,12 +14,84 @@ const Sidebar = () => {
 
     const [isPanelOpen, setIsPanelOpen] = useState(false);
 
-    const categories = ["Trending", "Latest", "Hot", "Cool", "Killer"];
+    const [categories, setCategories] = useState([]);
+
+    const getCategories = (path) => {
+        switch (path) {
+            case "/":
+                setCategories([
+                    "Featured",
+                    "Trending",
+                    "Latest",
+                    "Reviews",
+                    "Guides",
+                ]);
+                break;
+            case "/gaming":
+                setCategories([
+                    "Hub",
+                    "PC",
+                    "Mobile",
+                    "Console",
+                    "GTA News",
+                    "Minecraft",
+                    "Indie Games",
+                    "Discounts and Offers",
+                ]);
+                break;
+            case "/esports":
+                setCategories([
+                    "Valorant",
+                    "Counter-Strike",
+                    "PUBG",
+                    "BGMI",
+                    "League of Legends",
+                    "Dota 2",
+                    "Tournaments",
+                ]);
+                break;
+            case "/sports":
+                setCategories([
+                    "Cricket",
+                    "Football",
+                    "Formula 1",
+                    "Tennis",
+                    "Basketball",
+                    "Kabaddi",
+                ]);
+                break;
+            case "/technology":
+                setCategories([
+                    "Gadgets",
+                    "AI",
+                    "Smartphones",
+                    "Laptops",
+                    "Science",
+                    "Apps & Software",
+                    "Reviews",
+                ]);
+                break;
+            default:
+                setCategories([]);
+                break;
+        }
+    };
+
+    //determin categories
+    useEffect(() => {
+        getCategories(path);
+    }, [path]);
+
+    //determine if mouse clicked outside sidebar
+    // useEffect(() => {
+    //     setIsPanelOpen(false);
+    //     setBodyClick(false);
+    // }, [bodyClick]);
 
     return (
         <aside
-            className={`h-[91.5vh] fixed left-0 bottom-0 border-r border-r-secondary/30 [backdrop-filter:blur(10px)] bg-muted/10 
-      transition-all duration-300 ease-in z-50 ${
+            className={`h-[91.5vh] fixed left-0 top-[8.5vh] border-r border-r-secondary/30 [backdrop-filter:blur(3px)] bg-muted/10 
+      transition-all duration-300 ease-in z-40 ${
           isPanelOpen
               ? "w-[50%] sm:w-[30%] md:w-[20%] lg:w-[15%]"
               : "w-[10%] sm:w-[3rem]"
@@ -53,33 +126,39 @@ const Sidebar = () => {
                 text="Expand to see categories"
                 duration={2}
                 // shimmeringColor="hsl(var(--secondary))"
-                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap text-sm sm:text-[0.9rem] [letter-spacing:1px] font-thin text-muted-foreground transition-opacity duration-200 ${
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap text-sm sm:text-[0.9rem] [letter-spacing:1px] font-thin text-muted-foreground transition-opacity duration-200 px-70 py-2.5 cursor-default ${
                     isPanelOpen ? "opacity-0" : "opacity-100"
                 }`}
+                onClick={() => setIsPanelOpen(true)}
             />
 
             {/* Links */}
             <div className="w-full h-full p-1.5 flex flex-col gap-1">
                 {categories.map((cat, i) => (
-                    <Link
-                        href="#"
+                    <Button
                         key={i}
-                        className={`flex items-center rounded transition-all duration-300 
-                        hover:bg-muted hover:text-muted-foreground
-                        ${
+                        variant={"link"}
+                        className={`text-secondary transition-opacity duration-300 text-left flex items-center justify-start ${
                             isPanelOpen
-                                ? "justify-start gap-2 px-3 py-2"
-                                : "hidden"
+                                ? "gap-2 px-3 py-2 opacity-100"
+                                : "opacity-0 pointer-events-none"
                         }`}
+                        asChild
                     >
-                        <span
-                            className={`transition-opacity duration-300 ${
-                                isPanelOpen ? "opacity-100" : "opacity-0"
-                            }`}
+                        <Link
+                            href="#"
+                            className={`rounded transition-all duration-200 
+                            hover:bg-muted hover:text-muted-foreground`}
                         >
-                            {cat}
-                        </span>
-                    </Link>
+                            <span
+                                className={`transition-opacity duration-300 ${
+                                    isPanelOpen ? "opacity-100" : "opacity-0"
+                                }`}
+                            >
+                                {cat}
+                            </span>
+                        </Link>
+                    </Button>
                 ))}
             </div>
         </aside>
