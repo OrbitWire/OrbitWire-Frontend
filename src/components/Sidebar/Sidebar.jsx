@@ -105,7 +105,7 @@ const Sidebar = () => {
     return (
         <aside
             ref={sidebarRef}
-            className={`h-[91.5vh] fixed left-0 top-[8.5vh] border-r border-r-secondary/30 [backdrop-filter:blur(3px)] bg-muted/10 
+            className={`h-[91.5vh] fixed left-0 top-[8.5vh] border-r border-r-secondary/30 [backdrop-filter:blur(7px)] bg-muted/10 
       transition-all duration-300 ease-in z-40 ${
           isPanelOpen
               ? "w-[50%] sm:w-[30%] md:w-[20%] lg:w-[15%]"
@@ -155,6 +155,7 @@ const Sidebar = () => {
             {/* Links */}
             <div className="w-full h-full p-1.5 flex flex-col gap-1">
                 {categories.map((cat, i) => (
+                    
                     <Button
                         key={cat}
                         variant={"link"}
@@ -165,7 +166,7 @@ const Sidebar = () => {
                         }`}
                         asChild
                     >
-                        <Link href="#">{cat}</Link>
+                        <a href={`#${cat.toLowerCase()}`}>{cat}</a>
                     </Button>
                 ))}
             </div>

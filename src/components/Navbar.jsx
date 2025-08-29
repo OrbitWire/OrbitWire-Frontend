@@ -39,7 +39,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="w-full h-[8.5vh] border-b border-b-border flex items-center justify-between fixed top-0 z-50 ">
+        <nav className="w-full h-[8.5vh] border-b border-b-border flex items-center justify-between fixed top-0 z-50 [backdrop-filter:blur(10px)]">
             <Link
                 href={"/"}
                 className="w-[10rem] h-full overflow-hidden relative"
