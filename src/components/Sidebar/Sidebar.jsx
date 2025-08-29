@@ -111,6 +111,7 @@ const Sidebar = () => {
               ? "w-[50%] sm:w-[30%] md:w-[20%] lg:w-[15%]"
               : "w-[10%] sm:w-[3rem]"
       }`}
+            onClick={() => setIsPanelOpen(true)}
         >
             {/* Header */}
             <div className="relative flex items-center justify-center border-b border-b-secondary/30 h-13">
@@ -122,7 +123,10 @@ const Sidebar = () => {
                 </h1>
 
                 <button
-                    onClick={() => setIsPanelOpen(!isPanelOpen)}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setIsPanelOpen(!isPanelOpen);
+                    }}
                     className={`absolute ${
                         isPanelOpen ? "right-2" : "right-1"
                     } p-1 hover:bg-secondary/10  rounded transition `}
@@ -141,12 +145,11 @@ const Sidebar = () => {
                 text="Expand to see categories"
                 duration={2}
                 // shimmeringColor="hsl(var(--secondary))"
-                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap text-sm sm:text-[0.9rem] [letter-spacing:1px] font-thin text-muted-foreground transition-opacity duration-200 px-70 py-2.5 cursor-default ${
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap text-sm sm:text-[0.9rem] [letter-spacing:1px] font-thin text-muted-foreground transition-opacity duration-200 cursor-default ${
                     isPanelOpen
                         ? "opacity-0 pointer-events-none"
                         : "opacity-100"
                 }`}
-                onClick={() => setIsPanelOpen(true)}
             />
 
             {/* Links */}
