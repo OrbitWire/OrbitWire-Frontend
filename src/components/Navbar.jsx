@@ -66,7 +66,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                         <Link
                             href={"/"}
-                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.8rem]  ${
+                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.85rem]  ${
                                 pathname === "/"
                                     ? "bg-primary text-primary-foreground hover:bg-primary"
                                     : "text-foreground hover:bg-accent hover:outline"
@@ -79,7 +79,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                         <Link
                             href={"/gaming"}
-                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.8rem] ${
+                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.85rem] ${
                                 pathname === "/gaming"
                                     ? "bg-primary text-primary-foreground hover:bg-primary"
                                     : "text-foreground hover:bg-accent "
@@ -92,7 +92,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                         <Link
                             href={"/esports"}
-                            className={`px-3.5 py-1.5 rounded-lg transition-colors focus:bg-primary text-[0.8rem] ${
+                            className={`px-3.5 py-1.5 rounded-lg transition-colors focus:bg-primary text-[0.85rem] ${
                                 pathname === "/esports"
                                     ? "bg-primary text-primary-foreground hover:bg-primary"
                                     : "text-foreground hover:bg-accent "
@@ -105,7 +105,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                         <Link
                             href={"/sports"}
-                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.8rem] ${
+                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.85rem] ${
                                 pathname === "/sports"
                                     ? "bg-primary text-primary-foreground hover:bg-primary"
                                     : "text-foreground hover:bg-accent "
@@ -118,7 +118,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                         <Link
                             href={"/technology"}
-                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.8rem] ${
+                            className={`px-3.5 py-1.5 rounded-md transition-colors focus:bg-primary text-[0.85rem] ${
                                 pathname === "/technology"
                                     ? "bg-primary text-primary-foreground hover:bg-primary"
                                     : "text-foreground hover:bg-accent "

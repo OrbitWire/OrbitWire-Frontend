@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { PanelRightClose } from "lucide-react";
 import { ShimmeringText } from "../ui/shadcn-io/shimmering-text";
@@ -11,6 +11,7 @@ import { Button } from "../ui/button";
 const Sidebar = () => {
     const path = usePathname();
     const theme = useTheme();
+    const sidebarRef = useRef(null);
 
     const [isPanelOpen, setIsPanelOpen] = useState(false);
 
@@ -82,14 +83,28 @@ const Sidebar = () => {
         getCategories(path);
     }, [path]);
 
-    //determine if mouse clicked outside sidebar
-    // useEffect(() => {
-    //     setIsPanelOpen(false);
-    //     setBodyClick(false);
-    // }, [bodyClick]);
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                sidebarRef.current &&
+                !sidebarRef.current.contains(event.target)
+            ) {
+                setIsPanelOpen(false);
+            }
+        };
+
+        if (isPanelOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isPanelOpen]);
 
     return (
         <aside
+            ref={sidebarRef}
             className={`h-[91.5vh] fixed left-0 top-[8.5vh] border-r border-r-secondary/30 [backdrop-filter:blur(3px)] bg-muted/10 
       transition-all duration-300 ease-in z-40 ${
           isPanelOpen
@@ -127,7 +142,9 @@ const Sidebar = () => {
                 duration={2}
                 // shimmeringColor="hsl(var(--secondary))"
                 className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap text-sm sm:text-[0.9rem] [letter-spacing:1px] font-thin text-muted-foreground transition-opacity duration-200 px-70 py-2.5 cursor-default ${
-                    isPanelOpen ? "opacity-0" : "opacity-100"
+                    isPanelOpen
+                        ? "opacity-0 pointer-events-none"
+                        : "opacity-100"
                 }`}
                 onClick={() => setIsPanelOpen(true)}
             />
@@ -136,28 +153,16 @@ const Sidebar = () => {
             <div className="w-full h-full p-1.5 flex flex-col gap-1">
                 {categories.map((cat, i) => (
                     <Button
-                        key={i}
+                        key={cat}
                         variant={"link"}
-                        className={`text-secondary transition-opacity duration-300 text-left flex items-center justify-start ${
+                        className={`text-secondary transition-all duration-300 text-left flex items-center justify-start rounded hover:bg-muted hover:text-muted-foreground ${
                             isPanelOpen
                                 ? "gap-2 px-3 py-2 opacity-100"
                                 : "opacity-0 pointer-events-none"
                         }`}
                         asChild
                     >
-                        <Link
-                            href="#"
-                            className={`rounded transition-all duration-200 
-                            hover:bg-muted hover:text-muted-foreground`}
-                        >
-                            <span
-                                className={`transition-opacity duration-300 ${
-                                    isPanelOpen ? "opacity-100" : "opacity-0"
-                                }`}
-                            >
-                                {cat}
-                            </span>
-                        </Link>
+                        <Link href="#">{cat}</Link>
                     </Button>
                 ))}
             </div>
